@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.StressDetector" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Color de la barra de estado igual al fondo principal -->
+        <item name="android:statusBarColor">#1a1a2e</item>
+        <item name="android:navigationBarColor">#1a1a2e</item>
+        <!-- Iconos claros en la barra de estado (para fondo oscuro) -->
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

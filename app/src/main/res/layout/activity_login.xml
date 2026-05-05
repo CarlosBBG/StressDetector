@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F0F14"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Top spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Logo / Icon -->
+        <FrameLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="24dp">
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/avatar_background" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_analysis"
+                android:tint="#3B82F6"
+                android:contentDescription="Logo" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stress Detector"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicia sesión para continuar"
+            android:textSize="14sp"
+            android:textColor="#6B7280"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Form card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="24dp"
+            android:layout_marginHorizontal="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Iniciar Sesión"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="20dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                app:boxBackgroundMode="filled"
+                app:boxBackgroundColor="#0F0F14"
+                app:boxStrokeColor="#3B82F6"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:hintTextColor="#9CA3AF"
+                android:textColorHint="#6B7280">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCedula"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cédula"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="filled"
+                app:boxBackgroundColor="#0F0F14"
+                app:boxStrokeColor="#3B82F6"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:hintTextColor="#9CA3AF"
+                android:textColorHint="#6B7280"
+                app:endIconMode="password_toggle"
+                app:endIconTint="#6B7280">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/txtError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#EF4444"
+                android:textSize="13sp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminateTint="#3B82F6"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Iniciar Sesión"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:textAllCaps="false"
+                android:backgroundTint="#3B82F6"
+                android:layout_marginTop="20dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtRegisterLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿No tienes cuenta? Regístrate"
+            android:textColor="#3B82F6"
+            android:textSize="14sp"
+            android:padding="16dp"
+            android:layout_marginTop="8dp" />
+
+        <!-- Offline mode option -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="24dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#2D2D3A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="o"
+                android:textColor="#6B7280"
+                android:textSize="12sp"
+                android:paddingHorizontal="12dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="#2D2D3A" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtOfflineMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continuar sin cuenta"
+            android:textColor="#9CA3AF"
+            android:textSize="14sp"
+            android:padding="12dp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Solo análisis local, sin historial"
+            android:textColor="#4B5563"
+            android:textSize="11sp" />
+
+        <!-- Bottom spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TensorFlow Lite · MAX86150"
+            android:textSize="11sp"
+            android:textColor="#4B5563"
+            android:paddingBottom="16dp" />
+
+    </LinearLayout>
+
+</ScrollView>

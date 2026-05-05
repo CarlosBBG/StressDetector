@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/card_background"
+    android:padding="16dp"
+    android:layout_marginBottom="10dp">
+
+    <!-- Top row: Label + Badge + Chevron -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Color dot -->
+        <View
+            android:id="@+id/viewIndicator"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/badge_active" />
+
+        <TextView
+            android:id="@+id/txtLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NORMAL"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#10B981"
+            android:layout_marginStart="10dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Stress level badge -->
+        <TextView
+            android:id="@+id/txtLevelBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bajo"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/stress_level_badge_bg"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="3dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="›"
+            android:textSize="22sp"
+            android:textColor="#4B5563"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+    <!-- Probability row: percentage + visual bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/txtProbability"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:text="25%"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+        <!-- Progress bar background -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/progress_track">
+
+            <View
+                android:id="@+id/viewProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/badge_active" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Bottom row: Date + HR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="15 Mar 2026 - 19:41"
+            android:textSize="11sp"
+            android:textColor="#6B7280" />
+
+        <TextView
+            android:id="@+id/txtHr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="11sp"
+            android:textColor="#6B7280"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

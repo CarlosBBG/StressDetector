@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0F0F14">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#16161E"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="16dp"
+        android:gravity="center_vertical">
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp">
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/avatar_background" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_analysis"
+                android:tint="#3B82F6"
+                android:contentDescription="Análisis" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Análisis de Estrés"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ECG y BVP con CNN 1D"
+                android:textSize="12sp"
+                android:textColor="#6B7280"
+                android:layout_marginTop="1dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Button -->
+    <Button
+        android:id="@+id/btnSelectFile"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Cargar archivo"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:backgroundTint="#3B82F6"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="6dp" />
+
+    <!-- File name + status row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="10dp">
+
+        <View
+            android:id="@+id/dotStatus"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:background="@drawable/badge_active"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/txtFileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ningún archivo seleccionado"
+            android:textSize="13sp"
+            android:textColor="#6B7280" />
+    </LinearLayout>
+
+    <!-- Recommendations button (top, initially hidden) -->
+    <Button
+        android:id="@+id/btnRecommendations"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Ver Recomendaciones"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:backgroundTint="#6366F1"
+        android:visibility="gone"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateTint="#3B82F6" />
+
+    <!-- Status text (initial / loading / error) -->
+    <LinearLayout
+        android:id="@+id/cardStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_background"
+        android:padding="20dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/txtResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cargando modelo..."
+            android:textSize="14sp"
+            android:textColor="#D1D5DB"
+            android:lineSpacingExtra="6dp" />
+    </LinearLayout>
+
+    <!-- Results ScrollView (hidden until analysis completes) -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp">
+
+            <!-- Result Header Card -->
+            <LinearLayout
+                android:id="@+id/resultHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/card_background"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="28dp"
+                android:paddingBottom="24dp">
+
+                <TextView
+                    android:id="@+id/txtResultLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NORMAL"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#10B981"
+                    android:letterSpacing="0.15" />
+
+                <TextView
+                    android:id="@+id/txtProbability"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5.6%"
+                    android:textSize="56sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="4dp" />
+
+                <TextView
+                    android:id="@+id/txtStressLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nivel de estrés: Bajo"
+                    android:textSize="14sp"
+                    android:textColor="#9CA3AF"
+                    android:layout_marginTop="4dp" />
+
+                <!-- Pattern badge -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_background"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="6dp"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/txtPattern"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#9CA3AF" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Multi-window analysis card -->
+            <LinearLayout
+                android:id="@+id/cardMultiWindow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="20dp"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Análisis Multi-Ventana"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingBottom="14dp" />
+
+                <LinearLayout
+                    android:id="@+id/containerMultiWindow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+            <!-- Window distribution card -->
+            <LinearLayout
+                android:id="@+id/cardDistribution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="20dp"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distribución de Ventanas"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingBottom="14dp" />
+
+                <LinearLayout
+                    android:id="@+id/containerDistribution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+            <!-- Heart rate card -->
+            <LinearLayout
+                android:id="@+id/cardHeartRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="20dp"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Frecuencia Cardíaca"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingBottom="14dp" />
+
+                <LinearLayout
+                    android:id="@+id/containerHeartRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+            <!-- HRV card -->
+            <LinearLayout
+                android:id="@+id/cardHrv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="20dp"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Variabilidad Cardíaca (HRV)"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingBottom="14dp" />
+
+                <LinearLayout
+                    android:id="@+id/containerHrv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+            <!-- Coverage card -->
+            <LinearLayout
+                android:id="@+id/cardCoverage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="20dp"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cobertura del Análisis"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingBottom="14dp" />
+
+                <LinearLayout
+                    android:id="@+id/containerCoverage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+            <!-- Individual windows card -->
+            <LinearLayout
+                android:id="@+id/cardWindows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="20dp"
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ventanas Individuales"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingBottom="14dp" />
+
+                <LinearLayout
+                    android:id="@+id/containerWindows"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Footer -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TensorFlow Lite · MAX86150"
+        android:textSize="11sp"
+        android:textColor="#4B5563"
+        android:gravity="center"
+        android:paddingVertical="6dp" />
+
+</LinearLayout>

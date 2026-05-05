@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F0F14"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <!-- Hero section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background_gradient"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="28dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Avatar circle -->
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="56dp">
+
+                    <View
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:background="@drawable/avatar_background" />
+
+                    <TextView
+                        android:id="@+id/txtAvatarInitial"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:gravity="center"
+                        android:text="U"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="#3B82F6" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
+
+                    <TextView
+                        android:id="@+id/txtGreeting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hola"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bienvenido al Detector de Estrés"
+                        android:textSize="13sp"
+                        android:textColor="#9CA3AF"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Status badge -->
+            <LinearLayout
+                android:id="@+id/badgeStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/badge_active"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="18dp">
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@android:color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sistema listo para analizar"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Content padding -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
+
+            <!-- Quick stats row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <!-- Stat: Sensor -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="16dp"
+                    android:layout_marginEnd="6dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ECG + BVP"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#3B82F6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Señales"
+                        android:textSize="11sp"
+                        android:textColor="#6B7280"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <!-- Stat: Modelo -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="16dp"
+                    android:layout_marginHorizontal="6dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CNN 1D"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#818CF8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Red Neuronal"
+                        android:textSize="11sp"
+                        android:textColor="#6B7280"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+
+                <!-- Stat: Frecuencia -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="16dp"
+                    android:layout_marginStart="6dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="400Hz"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#10B981" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Muestreo"
+                        android:textSize="11sp"
+                        android:textColor="#6B7280"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Card: Cómo usar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="20dp"
+                android:layout_marginTop="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cómo usar"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingBottom="14dp" />
+
+                <!-- Step 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#3B82F6"
+                        android:background="@drawable/card_background" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ve a la pestaña Análisis"
+                        android:textSize="13sp"
+                        android:textColor="#D1D5DB"
+                        android:layout_marginStart="12dp" />
+                </LinearLayout>
+
+                <!-- Step 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="2"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#3B82F6"
+                        android:background="@drawable/card_background" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Carga un archivo CSV del sensor MAX86150"
+                        android:textSize="13sp"
+                        android:textColor="#D1D5DB"
+                        android:layout_marginStart="12dp" />
+                </LinearLayout>
+
+                <!-- Step 3 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#3B82F6"
+                        android:background="@drawable/card_background" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Espera el resultado del análisis"
+                        android:textSize="13sp"
+                        android:textColor="#D1D5DB"
+                        android:layout_marginStart="12dp" />
+                </LinearLayout>
+
+                <!-- Step 4 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="4"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#3B82F6"
+                        android:background="@drawable/card_background" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Consulta las recomendaciones"
+                        android:textSize="13sp"
+                        android:textColor="#D1D5DB"
+                        android:layout_marginStart="12dp" />
+                </LinearLayout>
+
+                <!-- Step 5 -->
+                <LinearLayout
+                    android:id="@+id/step5Container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:gravity="center"
+                        android:text="5"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#3B82F6"
+                        android:background="@drawable/card_background" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Revisa tu historial en la pestaña Historial"
+                        android:textSize="13sp"
+                        android:textColor="#D1D5DB"
+                        android:layout_marginStart="12dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Card: Último análisis -->
+            <LinearLayout
+                android:id="@+id/cardLastAnalysis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="20dp"
+                android:layout_marginTop="14dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Último análisis"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/txtLastResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#D1D5DB"
+                    android:lineSpacingExtra="4dp" />
+            </LinearLayout>
+
+            <!-- Offline mode banner -->
+            <LinearLayout
+                android:id="@+id/cardOfflineInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/offline_info_background"
+                android:padding="20dp"
+                android:layout_marginTop="14dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚠ Modo sin conexión"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#FBBF24"
+                    android:paddingBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tus resultados no se guardarán. Inicia sesión para acceder al historial y sincronizar tus mediciones automáticamente."
+                    android:textSize="13sp"
+                    android:textColor="#D1D5DB"
+                    android:textAlignment="viewStart"
+                    android:justificationMode="inter_word"
+                    android:lineSpacingExtra="3dp" />
+
+                <Button
+                    android:id="@+id/btnOfflineLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="14dp"
+                    android:backgroundTint="#3B82F6"
+                    android:text="Iniciar sesión"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <!-- About App button -->
+            <Button
+                android:id="@+id/btnAbout"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="ⓘ Acerca de la app"
+                android:textColor="#D1D5DB"
+                android:textSize="14sp"
+                android:textAllCaps="false"
+                android:backgroundTint="#1F1F2E"
+                android:layout_marginTop="14dp"
+                android:layout_marginHorizontal="0dp"
+                android:paddingStart="16dp" />
+
+            <!-- Bottom spacer -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
