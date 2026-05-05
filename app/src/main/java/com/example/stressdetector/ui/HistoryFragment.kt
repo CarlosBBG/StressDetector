@@ -19,6 +19,9 @@ import com.example.stressdetector.models.MeasurementSummary
 import com.example.stressdetector.models.parseError
 import kotlinx.coroutines.launch
 
+/**
+ * Historial de mediciones con paginacion y borrado.
+ */
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
@@ -48,6 +51,9 @@ class HistoryFragment : Fragment() {
         loadMeasurements()
     }
 
+    /**
+     * Configura la lista, el scroll infinito y el swipe para borrar.
+     */
     private fun setupRecyclerView() {
         adapter = MeasurementAdapter { measurement ->
             val intent = Intent(requireContext(), MeasurementDetailActivity::class.java)
@@ -82,6 +88,9 @@ class HistoryFragment : Fragment() {
         })
     }
 
+    /**
+     * Carga una pagina de mediciones desde el servidor.
+     */
     private fun loadMeasurements() {
         isLoading = true
         binding.progressBar.visibility = View.VISIBLE
@@ -121,6 +130,9 @@ class HistoryFragment : Fragment() {
         }
     }
 
+    /**
+     * Actualiza los indicadores de resumen en la parte superior.
+     */
     private fun updateStats(list: List<MeasurementSummary>) {
         binding.cardStats.visibility = View.VISIBLE
 
@@ -146,6 +158,9 @@ class HistoryFragment : Fragment() {
         binding.txtSubtitle.text = "$total mediciones registradas"
     }
 
+    /**
+     * Confirma con el usuario antes de borrar.
+     */
     private fun confirmDelete(item: MeasurementSummary, position: Int) {
         AlertDialog.Builder(requireContext())
             .setTitle("Eliminar medición")
@@ -160,6 +175,9 @@ class HistoryFragment : Fragment() {
             .show()
     }
 
+    /**
+     * Pide al servidor borrar la medicion.
+     */
     private fun deleteMeasurement(item: MeasurementSummary) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
@@ -194,6 +212,9 @@ class HistoryFragment : Fragment() {
         loadMeasurements()
     }
 
+    /**
+     * Muestra un mensaje de error en la pantalla.
+     */
     private fun showError(message: String) {
         binding.txtError.text = message
         binding.errorContainer.visibility = View.VISIBLE

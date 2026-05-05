@@ -13,6 +13,9 @@ import com.example.stressdetector.models.MeasurementSummary
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+/**
+ * Adaptador para la lista del historial.
+ */
 class MeasurementAdapter(
     private val onClick: (MeasurementSummary) -> Unit
 ) : ListAdapter<MeasurementSummary, MeasurementAdapter.ViewHolder>(DiffCallback) {
@@ -36,10 +39,16 @@ class MeasurementAdapter(
         holder.bind(getItem(position))
     }
 
+    /**
+     * ViewHolder que pinta cada tarjeta de medicion.
+     */
     inner class ViewHolder(
         private val binding: ItemMeasurementBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        /**
+         * Llena la tarjeta con datos y estilos.
+         */
         fun bind(item: MeasurementSummary) {
             val color = getColorForLevel(item.stressLevel)
 
@@ -101,6 +110,9 @@ class MeasurementAdapter(
             binding.root.setOnClickListener { onClick(item) }
         }
 
+        /**
+         * Devuelve un color segun el nivel de estres.
+         */
         private fun getColorForLevel(level: String): Int = when (level) {
             "Alto" -> colorAlto
             "Moderado-Alto" -> colorModeradoAlto

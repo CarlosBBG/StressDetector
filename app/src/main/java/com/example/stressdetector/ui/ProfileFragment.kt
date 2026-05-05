@@ -17,6 +17,9 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+/**
+ * Pantalla de perfil con datos basicos y estadisticas.
+ */
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
@@ -63,6 +66,9 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Pide al servidor las mediciones para calcular resumenes.
+     */
     private fun loadStatistics() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
@@ -77,6 +83,9 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Actualiza la UI con los numeros del historial.
+     */
     private fun updateStatistics(measurements: List<MeasurementSummary>) {
         if (measurements.isEmpty()) {
             setDefaultStatistics()
@@ -120,6 +129,9 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Muestra ceros cuando no hay datos.
+     */
     private fun setDefaultStatistics() {
         binding.txtTotalAnalysis.text = "0"
         binding.txtStressedCount.text = "0"
@@ -128,6 +140,9 @@ class ProfileFragment : Fragment() {
         binding.txtLastAnalysis.text = "Sin análisis"
     }
 
+    /**
+     * Convierte la fecha a un formato facil de leer.
+     */
     private fun formatBirthDate(rawDate: String): String {
         if (rawDate.isBlank()) return "No disponible"
 

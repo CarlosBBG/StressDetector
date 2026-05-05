@@ -6,10 +6,16 @@ import org.tensorflow.lite.Interpreter
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
+/**
+ * Encapsula la carga del modelo y una prediccion simple.
+ */
 class TFLiteRunner(private val context: Context) {
 
     private var interpreter: Interpreter? = null
 
+    /**
+     * Carga el modelo TFLite desde assets.
+     */
     fun loadModelFromAssets(modelName: String = "stress_detector.tflite") {
         val modelBuffer = context.assets.open(modelName).readBytes()
         val byteBuffer = ByteBuffer.allocateDirect(modelBuffer.size)
@@ -26,6 +32,9 @@ class TFLiteRunner(private val context: Context) {
     
     /**
      * Imprime información sobre los tensores de entrada/salida del modelo.
+     */
+    /**
+     * Muestra en logs el tamano de entrada y salida del modelo.
      */
     fun logModelInfo() {
         val tflite = interpreter ?: return
@@ -51,6 +60,9 @@ class TFLiteRunner(private val context: Context) {
     /**
      * Obtiene el shape de entrada esperado por el modelo.
      */
+    /**
+     * Devuelve el formato de entrada esperado por el modelo.
+     */
     fun getInputShape(): IntArray {
         val tflite = interpreter ?: return intArrayOf()
         return tflite.getInputTensor(0).shape()
@@ -59,6 +71,9 @@ class TFLiteRunner(private val context: Context) {
     /**
      * input: FloatArray con tamaño = 4000*2 (ECG,BVP)
      * output: probabilidad [0..1]
+     */
+    /**
+     * Ejecuta una prediccion y devuelve la probabilidad de estres.
      */
     fun predict(input: FloatArray): Float {
         val tflite = interpreter ?: error("Modelo no cargado. Llama loadModelFromAssets()")
@@ -83,6 +98,9 @@ class TFLiteRunner(private val context: Context) {
         return output[0][0]
     }
 
+    /**
+     * Libera memoria del interprete cuando ya no se usa.
+     */
     fun close() {
         interpreter?.close()
         interpreter = null

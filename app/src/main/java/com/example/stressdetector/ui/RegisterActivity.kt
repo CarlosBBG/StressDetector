@@ -21,6 +21,9 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
 
+/**
+ * Pantalla de registro de usuario.
+ */
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
@@ -41,6 +44,9 @@ class RegisterActivity : AppCompatActivity() {
         binding.txtLoginLink.setOnClickListener { finish() }
     }
 
+    /**
+     * Limita campos a letras y aplica mayuscula inicial.
+     */
     private fun setupInputFilters() {
         // Filter: only letters (no spaces, numbers, or special chars)
         val lettersOnlyFilter = InputFilter { source, _, _, _, _, _ ->
@@ -55,6 +61,9 @@ class RegisterActivity : AppCompatActivity() {
         binding.etApellido.addAutoCapitalizeWatcher()
     }
 
+    /**
+     * Configura el selector de fecha de nacimiento.
+     */
     private fun setupDatePicker() {
         binding.etFechaNacimiento.apply {
             isFocusable = false
@@ -64,6 +73,9 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Muestra un calendario para elegir la fecha.
+     */
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
 
@@ -89,6 +101,9 @@ class RegisterActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
+    /**
+     * Convierte la primera letra a mayuscula mientras el usuario escribe.
+     */
     private fun EditText.addAutoCapitalizeWatcher() {
         addTextChangedListener(object : TextWatcher {
             private var isUpdating = false
@@ -112,6 +127,9 @@ class RegisterActivity : AppCompatActivity() {
         })
     }
 
+    /**
+     * Valida datos y llama a la API para crear la cuenta.
+     */
     private fun performRegister() {
         val nombre = binding.etNombre.text.toString().trim()
         val apellido = binding.etApellido.text.toString().trim()
@@ -178,6 +196,9 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Valida una cedula ecuatoriana con reglas basicas.
+     */
     private fun isValidCedula(cedula: String): Boolean {
         // Must be exactly 10 digits
         if (cedula.length != 10 || !cedula.all { it.isDigit() }) {
@@ -214,16 +235,25 @@ class RegisterActivity : AppCompatActivity() {
         return true
     }
 
+    /**
+     * Muestra u oculta el indicador de carga.
+     */
     private fun showLoading(loading: Boolean) {
         binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
         binding.btnRegister.isEnabled = !loading
     }
 
+    /**
+     * Muestra un error claro en pantalla.
+     */
     private fun showError(message: String) {
         binding.txtError.text = message
         binding.txtError.visibility = View.VISIBLE
     }
 
+    /**
+     * Oculta el mensaje de error.
+     */
     private fun hideError() {
         binding.txtError.visibility = View.GONE
     }

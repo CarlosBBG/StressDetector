@@ -9,10 +9,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * Configura Retrofit y deja listo el cliente para la API.
+ */
 object ApiConfig {
 
     private var retrofit: Retrofit? = null
 
+    /**
+     * Devuelve una instancia lista para usar de la API.
+     */
     fun getApiService(context: Context): ApiService {
         if (retrofit == null) {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -31,6 +37,7 @@ object ApiConfig {
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build()
 
+            // Permite enviar/recibir valores especiales como NaN cuando aplica.
             val gson = GsonBuilder()
                 .serializeSpecialFloatingPointValues()
                 .create()

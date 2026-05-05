@@ -1,4 +1,4 @@
-package com.example.stressdetector.preprocessing
+package com.example.stressdetector.analysis
 
 /**
  * Datos estructurados de recomendaciones para la UI.
@@ -16,6 +16,9 @@ data class Recommendation(
  */
 object StressRecommendations {
 
+    /**
+     * Devuelve las recomendaciones segun nivel y patron detectado.
+     */
     fun getRecommendation(stressLevel: String, pattern: String): Recommendation {
         val patternInfo = getPatternInfo(pattern)
         return Recommendation(
@@ -26,6 +29,9 @@ object StressRecommendations {
         )
     }
 
+    /**
+     * Texto corto que resume el estado actual.
+     */
     fun getSubtitle(stressLevel: String): String {
         return when (stressLevel) {
             "Alto" -> "Tu nivel de estrés es alto. Sigue estas recomendaciones antes de continuar."
@@ -35,6 +41,9 @@ object StressRecommendations {
         }
     }
 
+    /**
+     * Lista de tecnicas sugeridas segun el nivel.
+     */
     private fun getTechniques(stressLevel: String): List<String> {
         return when (stressLevel) {
             "Alto" -> listOf(
@@ -59,6 +68,9 @@ object StressRecommendations {
         }
     }
 
+    /**
+     * Consejos practicos segun el nivel.
+     */
     private fun getTips(stressLevel: String): List<String> {
         return when (stressLevel) {
             "Alto" -> listOf(
@@ -87,6 +99,9 @@ object StressRecommendations {
         }
     }
 
+    /**
+     * Informacion extra segun el patron detectado.
+     */
     private fun getPatternInfo(pattern: String): Pair<String, String>? {
         return when (pattern) {
             "Estrés sostenido" -> Pair(

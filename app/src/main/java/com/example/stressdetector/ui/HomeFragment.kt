@@ -14,6 +14,9 @@ import com.example.stressdetector.auth.SessionManager
 import com.example.stressdetector.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
+/**
+ * Pantalla de inicio con accesos rapidos.
+ */
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -61,6 +64,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    /**
+     * Abre el modal de informacion de la app.
+     */
     private fun openAboutSheet() {
         val dialog = BottomSheetDialog(requireContext())
         val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_about, null)

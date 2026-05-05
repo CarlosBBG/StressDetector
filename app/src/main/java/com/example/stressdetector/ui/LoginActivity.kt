@@ -14,6 +14,9 @@ import com.example.stressdetector.models.LoginRequest
 import com.example.stressdetector.models.parseError
 import kotlinx.coroutines.launch
 
+/**
+ * Pantalla de inicio de sesion.
+ */
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
@@ -42,6 +45,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Valida campos y llama a la API para iniciar sesion.
+     */
     private fun performLogin() {
         val cedula = binding.etCedula.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
@@ -79,6 +85,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Abre la pantalla principal y limpia la pila.
+     */
     private fun navigateToMain() {
         startActivity(Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -86,16 +95,25 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
+    /**
+     * Muestra o oculta el indicador de carga.
+     */
     private fun showLoading(loading: Boolean) {
         binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
         binding.btnLogin.isEnabled = !loading
     }
 
+    /**
+     * Muestra el mensaje de error en pantalla.
+     */
     private fun showError(message: String) {
         binding.txtError.text = message
         binding.txtError.visibility = View.VISIBLE
     }
 
+    /**
+     * Oculta el mensaje de error.
+     */
     private fun hideError() {
         binding.txtError.visibility = View.GONE
     }

@@ -4,6 +4,9 @@ import com.example.stressdetector.auth.SessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
 
+/**
+ * Agrega el token en cada llamada si existe sesion.
+ */
 class AuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val token = SessionManager.getToken()

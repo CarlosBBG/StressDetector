@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import com.example.stressdetector.MainActivity
 import com.example.stressdetector.databinding.FragmentAboutBinding
 
+/**
+ * Pantalla simple con informacion de la app.
+ */
 class AboutAppFragment : Fragment() {
 
     private var _binding: FragmentAboutBinding? = null

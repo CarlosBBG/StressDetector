@@ -7,12 +7,15 @@ import com.example.stressdetector.ui.LoginActivity
 import okhttp3.Interceptor
 import okhttp3.Response
 
+/**
+ * Si el servidor devuelve 401, limpia sesion y regresa al login.
+ */
 class UnauthorizedInterceptor(private val context: Context) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val response = chain.proceed(request)
 
-        // Don't intercept 401 on auth endpoints — those mean wrong credentials, not expired token
+        // No tocar errores de login/registro, ahi el 401 es normal.
         val path = request.url.encodedPath
         if (response.code == 401 && !path.contains("/auth/")) {
             SessionManager.clearSession()

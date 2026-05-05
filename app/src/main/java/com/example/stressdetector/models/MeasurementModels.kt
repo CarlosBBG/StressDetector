@@ -1,8 +1,11 @@
 package com.example.stressdetector.models
 
-import com.example.stressdetector.preprocessing.StressResult
+import com.example.stressdetector.analysis.StressResult
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Cuerpo para enviar una medicion al servidor.
+ */
 data class MeasurementRequest(
     val probability: Float,
     @SerializedName("probability_median") val probabilityMedian: Float,
@@ -34,6 +37,9 @@ data class MeasurementRequest(
     @SerializedName("window_results") val windowResults: List<WindowResultRequest>
 )
 
+/**
+ * Resultado de una ventana individual para enviar al servidor.
+ */
 data class WindowResultRequest(
     @SerializedName("segment_id") val segmentId: Int,
     @SerializedName("window_index") val windowIndex: Int,
@@ -42,6 +48,9 @@ data class WindowResultRequest(
     @SerializedName("is_stressed") val isStressed: Boolean
 )
 
+/**
+ * Convierte el resultado local del analisis a un formato de API.
+ */
 fun StressResult.toMeasurementRequest(fileName: String): MeasurementRequest {
     fun Float.nanToNull(): Float? = if (this.isNaN()) null else this
 
@@ -87,8 +96,14 @@ fun StressResult.toMeasurementRequest(fileName: String): MeasurementRequest {
 
 // --- Response models ---
 
+/**
+ * Respuesta basica al guardar una medicion.
+ */
 data class MeasurementResponse(val message: String, val id: Int)
 
+/**
+ * Respuesta de listado paginado.
+ */
 data class MeasurementListResponse(
     val measurements: List<MeasurementSummary>,
     val total: Int,
@@ -96,6 +111,9 @@ data class MeasurementListResponse(
     val page: Int
 )
 
+/**
+ * Resumen compacto para las listas.
+ */
 data class MeasurementSummary(
     val id: Int,
     val timestamp: String,
@@ -108,6 +126,9 @@ data class MeasurementSummary(
     @SerializedName("file_name") val fileName: String?
 )
 
+/**
+ * Detalle completo para la pantalla de una medicion.
+ */
 data class MeasurementDetail(
     val id: Int,
     val timestamp: String,
@@ -141,6 +162,9 @@ data class MeasurementDetail(
     @SerializedName("window_results") val windowResults: List<WindowResultDetail>?
 )
 
+/**
+ * Detalle de una ventana individual en el historial.
+ */
 data class WindowResultDetail(
     @SerializedName("segment_id") val segmentId: Int,
     @SerializedName("window_index") val windowIndex: Int,

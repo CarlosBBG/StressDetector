@@ -19,6 +19,9 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+/**
+ * Pantalla con el detalle completo de una medicion.
+ */
 class MeasurementDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMeasurementDetailBinding
@@ -48,6 +51,9 @@ class MeasurementDetailActivity : AppCompatActivity() {
         loadDetail()
     }
 
+    /**
+     * Carga el detalle desde la API.
+     */
     private fun loadDetail() {
         binding.progressBar.visibility = View.VISIBLE
         binding.txtError.visibility = View.GONE
@@ -68,6 +74,9 @@ class MeasurementDetailActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Muestra los datos en las tarjetas.
+     */
     private fun displayDetail(detail: MeasurementDetail) {
         val isStressed = detail.isStressed
         val color = if (isStressed) colorStress else colorNormal
@@ -140,6 +149,9 @@ class MeasurementDetailActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Inserta filas en una tarjeta.
+     */
     private fun populateCard(
         card: LinearLayout,
         container: LinearLayout,
@@ -152,6 +164,9 @@ class MeasurementDetailActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Crea una fila con etiqueta y valor.
+     */
     private fun addDetailRow(container: LinearLayout, label: String, value: String, isLast: Boolean) {
         val row = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
@@ -200,6 +215,9 @@ class MeasurementDetailActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Muestra una ventana individual en la lista.
+     */
     private fun addWindowRow(container: LinearLayout, label: String, value: String, dotColor: String) {
         val row = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
@@ -243,9 +261,19 @@ class MeasurementDetailActivity : AppCompatActivity() {
         container.addView(row)
     }
 
+    /**
+     * Formatea un valor como porcentaje.
+     */
     private fun formatPct(value: Float): String = "${(value * 100).toInt()}%"
+
+    /**
+     * Formatea un numero con un decimal.
+     */
     private fun formatFloat(value: Float): String = "%.1f".format(value)
 
+    /**
+     * Traduce el score en una etiqueta de calidad.
+     */
     private fun formatQuality(score: Float): String {
         val label = when {
             score >= 3.5f -> "Excelente"
@@ -257,6 +285,9 @@ class MeasurementDetailActivity : AppCompatActivity() {
         return "${"%.1f".format(score)}/4.0 · $label"
     }
 
+    /**
+     * Confirma antes de eliminar la medicion.
+     */
     private fun confirmDelete() {
         AlertDialog.Builder(this)
             .setTitle("Eliminar medición")
@@ -266,6 +297,9 @@ class MeasurementDetailActivity : AppCompatActivity() {
             .show()
     }
 
+    /**
+     * Elimina la medicion desde el servidor.
+     */
     private fun deleteMeasurement() {
         lifecycleScope.launch {
             try {
@@ -286,6 +320,9 @@ class MeasurementDetailActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Muestra un error en la pantalla.
+     */
     private fun showError(message: String) {
         binding.txtError.text = message
         binding.txtError.visibility = View.VISIBLE

@@ -10,6 +10,9 @@ import com.example.stressdetector.ui.HistoryFragment
 import com.example.stressdetector.ui.HomeFragment
 import com.example.stressdetector.ui.ProfileFragment
 
+/**
+ * Activity principal con la navegacion inferior.
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -28,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el menu inferior y sus pantallas.
+     */
     private fun setupBottomNav() {
         // Hide History and Profile tabs in offline mode
         if (SessionManager.isOfflineMode()) {
@@ -48,6 +54,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Cambia el fragmento visible en la pantalla.
+     */
     fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)

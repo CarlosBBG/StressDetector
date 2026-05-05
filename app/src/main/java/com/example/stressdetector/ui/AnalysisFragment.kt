@@ -17,20 +17,23 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.stressdetector.R
+import com.example.stressdetector.analysis.StressAnalyzer
+import com.example.stressdetector.analysis.StressRecommendations
+import com.example.stressdetector.analysis.StressResult
 import com.example.stressdetector.api.ApiConfig
 import com.example.stressdetector.api.ApiService
 import com.example.stressdetector.auth.SessionManager
 import com.example.stressdetector.databinding.FragmentAnalysisBinding
 import com.example.stressdetector.models.parseError
 import com.example.stressdetector.models.toMeasurementRequest
-import com.example.stressdetector.preprocessing.StressAnalyzer
-import com.example.stressdetector.preprocessing.StressRecommendations
-import com.example.stressdetector.preprocessing.StressResult
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Pantalla donde se analiza un archivo CSV y se muestran resultados.
+ */
 class AnalysisFragment : Fragment() {
 
     private var _binding: FragmentAnalysisBinding? = null
@@ -78,6 +81,9 @@ class AnalysisFragment : Fragment() {
         setupListeners()
     }
 
+    /**
+     * Oculta tarjetas de resultado y deja solo el estado inicial.
+     */
     private fun hideResults() {
         binding.scrollView.visibility = View.GONE
         binding.cardStatus.visibility = View.VISIBLE
@@ -85,6 +91,9 @@ class AnalysisFragment : Fragment() {
         lastStressResult = null
     }
 
+    /**
+     * Llena las tarjetas con los datos calculados.
+     */
     private fun showResultCards(result: StressResult) {
         binding.cardStatus.visibility = View.GONE
         binding.scrollView.visibility = View.VISIBLE
@@ -162,6 +171,9 @@ class AnalysisFragment : Fragment() {
         binding.scrollView.smoothScrollTo(0, 0)
     }
 
+    /**
+     * Inserta filas de texto en una tarjeta.
+     */
     private fun populateCard(
         card: LinearLayout,
         container: LinearLayout,
@@ -174,6 +186,9 @@ class AnalysisFragment : Fragment() {
         }
     }
 
+    /**
+     * Crea una fila con etiqueta y valor.
+     */
     private fun addDetailRow(container: LinearLayout, label: String, value: String, isLast: Boolean) {
         val ctx = requireContext()
         val row = LinearLayout(ctx).apply {
@@ -221,6 +236,9 @@ class AnalysisFragment : Fragment() {
         }
     }
 
+    /**
+     * Agrega una fila para una ventana individual.
+     */
     private fun addWindowRow(container: LinearLayout, label: String, value: String, dotColor: String) {
         val ctx = requireContext()
         val row = LinearLayout(ctx).apply {
@@ -265,16 +283,25 @@ class AnalysisFragment : Fragment() {
         container.addView(row)
     }
 
+    /**
+     * Formatea un valor como porcentaje entero.
+     */
     private fun formatPct(value: Float): String {
         if (value.isNaN()) return "N/A"
         return "${(value * 100).toInt()}%"
     }
 
+    /**
+     * Formatea un numero con un decimal.
+     */
     private fun formatFloat(value: Float): String {
         if (value.isNaN()) return "N/A"
         return "%.1f".format(value)
     }
 
+    /**
+     * Convierte el score de calidad en texto amigable.
+     */
     private fun formatQuality(score: Float): String {
         val label = when {
             score >= 3.5f -> "Excelente"
@@ -286,6 +313,9 @@ class AnalysisFragment : Fragment() {
         return "${"%.1f".format(score)}/4.0 · $label"
     }
 
+    /**
+     * Carga el modelo y prepara el analizador.
+     */
     private fun initAnalyzer() {
         stressAnalyzer = StressAnalyzer(requireContext())
 
@@ -303,6 +333,9 @@ class AnalysisFragment : Fragment() {
         }
     }
 
+    /**
+     * Conecta los botones con sus acciones.
+     */
     private fun setupListeners() {
         binding.btnSelectFile.setOnClickListener {
             filePickerLauncher.launch(arrayOf(
@@ -318,6 +351,9 @@ class AnalysisFragment : Fragment() {
         }
     }
 
+    /**
+     * Ejecuta el analisis del archivo seleccionado.
+     */
     private fun analyzeFile(uri: Uri) {
         showLoading(true)
         hideResults()
@@ -359,6 +395,9 @@ class AnalysisFragment : Fragment() {
         }
     }
 
+    /**
+     * Abre recomendaciones personalizadas en un modal.
+     */
     private fun openRecommendationsSheet() {
         val result = lastStressResult ?: return
         val ctx = requireContext()
@@ -410,6 +449,9 @@ class AnalysisFragment : Fragment() {
         dialog.show()
     }
 
+    /**
+     * Crea una fila para una recomendacion.
+     */
     private fun createRecommendationItem(itemText: String, dotColor: String): LinearLayout {
         val ctx = requireContext()
         val row = LinearLayout(ctx).apply {
@@ -447,6 +489,9 @@ class AnalysisFragment : Fragment() {
         return row
     }
 
+    /**
+     * Envia la medicion al servidor cuando hay conexion.
+     */
     private fun saveMeasurementToServer(stressResult: StressResult) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
@@ -468,11 +513,17 @@ class AnalysisFragment : Fragment() {
         }
     }
 
+    /**
+     * Muestra u oculta el indicador de carga.
+     */
     private fun showLoading(loading: Boolean) {
         binding.progressBar.isVisible = loading
         binding.btnSelectFile.isEnabled = !loading
     }
 
+    /**
+     * Obtiene el nombre del archivo desde el proveedor de contenido.
+     */
     private fun getFileName(uri: Uri): String {
         var name = "archivo.csv"
         requireContext().contentResolver.query(uri, null, null, null, null)?.use { cursor ->
