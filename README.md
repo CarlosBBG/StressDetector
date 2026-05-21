@@ -1,3 +1,5 @@
+# StressDetector
+
 Aplicacion Android para deteccion de estres en estudiantes, basada en el analisis de senales fisiologicas y un modelo TFLite. La app permite cargar archivos CSV, procesar la senal, estimar el nivel de estres y mostrar recomendaciones.
 
 ## Funcionalidades principales
@@ -36,6 +38,7 @@ Aplicacion Android para deteccion de estres en estudiantes, basada en el analisi
 
 ## Estructura de codigo (app/src/main/java)
 
+```text
 app/src/main/java/
 └── com/example/stressdetector/
     ├── MainActivity.kt
@@ -71,6 +74,18 @@ app/src/main/java/
     │   ├── ProfileFragment.kt
     │   └── RegisterActivity.kt
     └── util/
+```
+
+## Gradle (root + app)
+
+```text
+./
+├── build.gradle.kts
+├── settings.gradle.kts
+├── gradle.properties
+└── app/
+    └── build.gradle.kts
+```
 
 ## Modelo y assets
 
